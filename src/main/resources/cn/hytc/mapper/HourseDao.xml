@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hytc.dao.HourseDao">
+
+    <select id="searchAddressByHourseId" parameterType="java.lang.Integer" resultType="cn.hytc.model.Address">
+        SELECT
+          *
+        FROM
+          t_hourseArea tha
+        WHERE
+          tha.hourseId=#{hourseId}
+    </select>
+
+    <update id="updateHourseStatus" parameterType="java.lang.String" >
+        UPDATE
+          t_hourse th
+        SET
+          th.status=0
+        WHERE
+          th.id=#{hourseId}
+    </update>
+
+    <select id="searchHourse" resultType="java.lang.Integer">
+        SELECT
+          COUNT(1)
+        FROM
+          t_hourse th
+        WHERE
+          th.status=1
+
+    </select>
+
+    <select id="searchHourseNoCondition" parameterType="java.util.Map" resultType="cn.hytc.model.Hourse">
+        SELECT
+        th.`categoeryId`
+        ,th.`endTime`
+        ,th.`hourseAreaId`
+        ,th.`id`as hourseId
+        ,th.`isRent`
+        ,th.`masterId`
+        ,th.`singleMoney`
+        ,th.`status`
+        ,th.`userId`
+        ,th.`userName`
+        ,th.hourseName
+        FROM
+        t_hourse th
+        WHERE
+        th.status=1
+        <if test="start!=null">
+            LIMIT
+            #{start} ,3
+        </if>
+
+    </select>
+
+    <select id="searchHourseListByName" parameterType="java.lang.String" resultType="cn.hytc.model.Hourse">
+      SELECT
+        th.id AS hourseId
+      FROM
+        t_hourse th
+      WHERE
+        th.status=1
+      AND
+        th.`keyWord` like ${name}
+    </select>
+
+    <select id="searchHourseByHourseId" parameterType="java.lang.String" resultType="cn.hytc.model.Hourse">
+      SELECT
+        *
+      FROM
+        t_hourse th
+      WHERE
+        th.status=1
+      AND
+        th.id = #{hourseId}
+    </select>
+    <insert id="createHourseeHourse" parameterType="cn.hytc.model.Hourse">
+        INSERT INTO
+        t_hourse
+        (
+        categoeryId
+        ,hourseName
+        ,hourseAreaId
+        ,singleMoney
+        ,keyWord
+        ,room
+        ,leaveRoom
+        )
+        VALUES
+        (
+        #{categoeryId}
+        ,#{hourseName}
+        ,#{hourseAreaId}
+        ,#{singleMoney}
+        ,#{keyWord}
+        ,#{room}
+        ,#{room}
+        )
+
+
+
+    </insert>
+</mapper>

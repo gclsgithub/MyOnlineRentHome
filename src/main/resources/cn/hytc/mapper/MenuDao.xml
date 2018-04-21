@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hytc.dao.MenuDao">
+    <select id="searchMenuByUserType" parameterType="java.lang.String" resultType="cn.hytc.model.Menu">
+    SELECT
+      DISTINCT
+        tm.menuName,
+        tm.menuAddress
+    FROM
+        t_menu tm
+    LEFT JOIN
+        t_menuAndUser tmu
+    ON
+        tmu.`menuId`=tm.`id`
+    LEFT JOIN
+        t_user tu
+    ON
+        tu.id=tmu.userId
+    WHERE
+        tu.`userType`=#{userType}
+    </select>
+</mapper>

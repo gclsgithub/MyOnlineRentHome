@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hytc.dao.AccountDao">
+    <update id="addMoneyToUserAccount" parameterType="java.util.Map">
+        UPDATE
+            t_account ta
+        SET
+            ta.`accountMoney`=#{accountMoney}
+        WHERE
+            ta.userId=#{userId}
+    </update>
+    
+    <select id="searchUsrMoneyByUserId" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT
+          ta.accountMoney
+        FROM
+          t_account ta
+        WHERE
+          ta.userId=#{userId}
+    </select>
+
+</mapper>

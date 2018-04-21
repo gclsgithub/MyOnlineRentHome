@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hytc.dao.UserDao">
+    <sql id="dosearchByUserName">
+        FROM
+          t_user t
+        WHERE
+          t.userName=#{userName}
+        AND
+          t.status=1
+    </sql>
+
+    <select id="searchUserAccountByUserId" parameterType="java.lang.String" resultType="cn.hytc.model.Account">
+        SELECT
+            ta.id as accountId,
+            ta.accountName,
+            ta.accountMoney
+        FROM
+            t_account ta
+        WHERE
+            ta.userId=#{userId}
+    </select>
+
+    <select id="searchUserAccountByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+         SELECT
+            COUNT(1)
+        FROM
+          t_user tu
+        WHERE
+          tu.status=1
+        AND
+          tu.userName LIKE #{userName}
+    </select>
+
+    <select id="searchUserByUserName" parameterType="java.lang.String" resultType="cn.hytc.model.User">
+        SELECT
+            tu.id as userId,
+            tu.userName,
+            tu.passWord,
+            tu.userType,
+            tu.telPhone
+        FROM
+          t_user tu
+        WHERE
+          tu.status=1
+        AND
+          tu.userName LIKE #{userName}
+        LIMIT
+            0 ,3
+    </select>
+
+
+    <update id="deletUserByUserId" parameterType="java.lang.String">
+        UPDATE
+          t_user tu
+        SET
+          tu.status=0
+        WHERE
+          tu.id=#{userId}
+
+    </update>
+    <update id="updateUser" parameterType="cn.hytc.model.User">
+        UPDATE
+            t_user tu
+        SET
+            tu.`userName`=#{userName}
+            ,tu.`passWord`=#{passWord}
+            ,tu.`sex`=#{sex}
+            ,tu.`telPhone`=#{telPhone}
+            ,tu.`userType`=#{userType}
+        WHERE
+            tu.id=#{userId}
+    </update>
+    <select id="searchUserAccount" resultType="java.lang.Integer">
+        SELECT
+          count(1)
+        FROM
+          t_user
+    </select>
+
+    <select id="searchUserNoCondition" parameterType="java.util.Map" resultType="cn.hytc.model.User">
+        SELECT
+          tu.id as userId,
+          tu.userName,
+          tu.passWord,
+          tu.userType,
+          tu.telPhone
+        FROM
+          t_user tu
+        WHERE
+          tu.status=1
+        <if test="start!=null">
+        LIMIT
+          #{start} ,3
+        </if>
+
+    </select>
+
+    <insert id="insertUser" parameterType="cn.hytc.model.User">
+        INSERT INTO
+            t_user(
+            userName
+            ,passWord
+            ,sex
+            ,userType
+            ,telPhone)
+        VALUES
+            (#{userName}
+            ,#{passWord}
+            ,#{sex}
+            ,#{userType}
+            ,#{telPhone}
+            )
+    </insert>
+    <select id="searchUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT
+          count(1)
+        <include refid="dosearchByUserName"></include>
+    </select>
+    <select id="SearchUserByUserName" parameterType="cn.hytc.model.User" resultType="cn.hytc.model.User">
+        SELECT
+          t.id as userId,
+          t.userName as userName,
+          t.passWord as passWord,
+          t.userType as userType,
+          t.telPhone as telPhone
+        <include refid="dosearchByUserName"></include>
+    </select>
+
+    <select id="searchUserByUserId" parameterType="java.lang.String" resultType="cn.hytc.model.User">
+        SELECT
+          *
+        FROM
+          t_user t
+        WHERE
+          t.id=#{userId}
+          AND
+          t.status=1
+    </select>
+</mapper>

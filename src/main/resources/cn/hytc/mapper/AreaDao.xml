@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hytc.dao.AreaDao">
+    <select id="" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT
+            tha.id
+        FROM
+            t_hourseArea tha
+        WHERE
+            tha.`city`='北京'
+    </select>
+</mapper>

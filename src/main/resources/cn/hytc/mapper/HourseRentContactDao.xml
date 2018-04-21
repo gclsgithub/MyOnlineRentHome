@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hytc.dao.HourseRentContactDao">
+
+    <select id="searchHourseContractByHourseId" parameterType="java.lang.String" resultType="cn.hytc.model.HourseContract">
+        SELECT
+            thc.`id` as contractId
+            ,thc.`rentUserId` as userId
+            ,thc.`hourseId`
+            ,thc.`masterId`
+            ,thc.`contractContent`
+            ,thc.`rentDay`
+            ,thc.`rentMethod`
+            ,thc.`singleMoney`
+            ,thc.`money`
+            ,thc.`isPayed`
+            ,thc.`rentType`
+        FROM
+          t_hourseContract thc
+        WHERE
+          thc.status=1
+        AND
+          thc.hourseId=#{hourseId}
+
+    </select>
+
+    <select id="searchHourseNoCondition" parameterType="java.util.Map" resultType="cn.hytc.model.HourseContract">
+        SELECT
+            thc.`id` as contractId
+            ,thc.`rentUserId` as userId
+            ,thc.`hourseId`
+            ,thc.`masterId`
+            ,thc.`contractContent`
+            ,thc.`rentDay`
+            ,thc.`rentMethod`
+            ,thc.`singleMoney`
+            ,thc.`money`
+            ,thc.`isPayed`
+            ,thc.`rentType`
+        FROM
+          t_hourseContract thc
+        WHERE
+          thc.status=1
+        <if test="start!=null">
+            LIMIT
+            #{start} ,3
+        </if>
+
+    </select>
+    <select id="searchAllHourseContractCount" resultType="java.lang.Integer">
+        SELECT
+          COUNT(1)
+        FROM
+          t_hourseContract thc
+        WHERE
+          thc.status=1
+    </select>
+
+    <select id="SeachUserAndAccountByUserName" parameterType="cn.hytc.model.User" resultType="cn.hytc.model.Account">
+        SELECT
+            ta.id AS accountId,
+            ta.userId,
+            ta.accountName,
+            ta.accountMoney
+        FROM
+            t_user tu
+        LEFT JOIN
+            t_account ta
+        ON
+            ta.userId=tu.`id`
+        WHERE
+            tu.id=#{userId}
+        AND
+            tu.status=1
+    </select>
+
+    <update id="reduceAccount" parameterType="cn.hytc.model.HourseContract" >
+        UPDATE
+          t_account ta
+        SET
+          ta.`accountMoney`=#{leaveMoney}
+        where ta.id=#{accountId}
+    </update>
+
+    <insert id="createHourseContract" parameterType="cn.hytc.model.HourseContract">
+        insert into
+          t_hourseContract
+          (
+          rentUserId
+          ,hourseId
+          ,masterId
+          ,contractContent
+          ,rentDay
+          ,createTime
+          ,createUser
+          ,rentMethod
+          ,money
+          ,isPayed
+          ,singleMoney
+          ,rentType
+          )
+           Values
+           (
+           #{rentUserId}
+           ,#{hourseId}
+           ,#{masterId}
+           ,#{contractContent}
+           ,#{rentDay}
+           ,now()
+           ,#{userId}
+           ,#{rentMethod}
+           ,#{money}
+           ,#{isPayed}
+           ,#{singleMoney}
+           ,#{rentType}
+           )
+
+    </insert>
+</mapper>
