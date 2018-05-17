@@ -5,6 +5,20 @@
 
 <mapper namespace="cn.hytc.dao.HourseDao">
 
+
+
+    <select id="searchHourseListByName" parameterType="java.util.Map" resultType="cn.hytc.model.Hourse">
+        SELECT
+          *
+        FROM
+          t_hourse th
+        WHERE
+          th.hourseName=#{hourseName}
+        <if test="start!=null">
+            LIMIT
+            #{start} ,3
+        </if>
+    </select>
     <select id="searchAddressByHourseId" parameterType="java.lang.Integer" resultType="cn.hytc.model.Address">
         SELECT
           *
@@ -57,7 +71,7 @@
 
     </select>
 
-    <select id="searchHourseListByName" parameterType="java.lang.String" resultType="cn.hytc.model.Hourse">
+    <select id="searchHourseByKeyWord" parameterType="java.lang.String" resultType="cn.hytc.model.Hourse">
       SELECT
         th.id AS hourseId
       FROM

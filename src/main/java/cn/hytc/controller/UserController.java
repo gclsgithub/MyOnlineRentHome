@@ -19,16 +19,16 @@ import java.util.List;
 @Controller
 @ResponseBody
 @RequestMapping("user")
-public class UserController {
+public class  UserController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping("searchAllUserByUserName")
-    private  ModelAndView searchAllUserByUserName(String search_text){
+    private  ModelAndView searchAllUserByUserName(String userName){
         ModelAndView mv=new ModelAndView();
-        List<User> userList=userService.searchUserByUserName(search_text);
-        Integer account=userService.searchUserAccountByUserName(search_text);
+        List<User> userList=userService.searchUserByUserName(userName);
+        Integer account=userService.searchUserAccountByUserName(userName);
         mv.addObject("userList",userList);
         mv.addObject("account",account);
         mv.setViewName("jsps/backStage/bUser");

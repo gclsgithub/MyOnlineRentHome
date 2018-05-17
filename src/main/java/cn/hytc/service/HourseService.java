@@ -6,7 +6,7 @@ import cn.hytc.model.Hourse;
 import java.util.List;
 
 public interface HourseService {
-    List<Hourse> searchHourseByName(String name);
+    List<Hourse> searchHourseByKeyWord(String name);
 
     Hourse searchHourseByHourseId(String hourseId);
 
@@ -19,4 +19,6 @@ public interface HourseService {
     Address searchHourseAddressByHourseId(String hourseId);
 
     void createHourse(Hourse hourse, String city);
+
+    List<Hourse> searchHourseByName(String hourseName,int start,int offPage);
 }

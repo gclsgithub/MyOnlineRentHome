@@ -23,7 +23,8 @@
         WHERE
           thc.status=1
         AND
-          thc.hourseId=#{hourseId}
+          thc.id=#{hourseId}
+        Limit 0,3
 
     </select>
 

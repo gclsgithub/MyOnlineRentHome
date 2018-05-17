@@ -74,10 +74,10 @@ function modalshow(id,Qurl,hourseName,nan,nv){
         '<div class="modal-right">'+
         '<div class="slider cl">'+
         '<ul class="tabcon">'+
-            '<li><img src="../images/pic/1.png"></li>'+
-            '<li><img src="../images/pic/2.png"></li>'+
-            '<li><img src="../images/pic/3.png"></li>'+
-            '<li><img src="../images/pic/4.png"></li>'+
+            '<li><img src="../images/pic/TEE1.png"></li>'+
+            '<li><img src="../images/pic/TEE2.png"></li>'+
+            '<li><img src="../images/pic/TEE3.png"></li>'+
+            '<li><img src="../images/pic/TEE4.png"></li>'+
         '</ul>'+
         '</div>'+
         '</div>'+

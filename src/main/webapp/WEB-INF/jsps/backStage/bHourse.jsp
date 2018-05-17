@@ -26,8 +26,8 @@
 </head>
 <body>
     <div class="clearfix">
-        <form method="get" action="${pageContext.request.contextPath}/common/searchHourseByName.do">
-            <input type="text" placeholder="请输入关键词" class="input-text ac_input" name="search_text" value="" id="search_text" autocomplete="off" style="width:300px"><button type="submit" class="btn btn-default" id="search_button">搜索</button>
+        <form method="get" action="${pageContext.request.contextPath}/hourse/bsearchHourseByHourseName.do">
+            <input type="text" placeholder="请输入房屋名" class="input-text ac_input" name="hourseName" value="" id="search_text" autocomplete="off" style="width:300px"><button type="submit" class="btn btn-default" id="search_button">搜索</button>
         </form>
     </div>
 <table class="table table-border table-bordered table-hover">

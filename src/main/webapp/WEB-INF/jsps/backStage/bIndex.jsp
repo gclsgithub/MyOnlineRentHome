@@ -113,7 +113,7 @@
         <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
         <div class="menu">
             <ul id="menu" >
-                <li><a href="${pageContext.request.contextPath}/index.jsp"><i class="fa fa-tachometer"></i> <span>Home</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/MyIndex.jsp"><i class="fa fa-tachometer"></i> <span>Home</span></a></li>
                 <c:forEach items="${menulist}" var="menu">
                     <li><a href="${pageContext.request.contextPath}/${menu.menuAddress}" target="right"><i class="fa fa-tachometer"></i> <span>${menu.menuName}</span></a></li>
                 </c:forEach>

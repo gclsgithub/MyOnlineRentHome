@@ -5,12 +5,13 @@ import cn.hytc.model.Hourse;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public interface HourseDao {
-    List<Hourse> searchHourseListByName(@Param("name") String name);
+    List<Hourse> searchHourseByKeyWord(@Param("name") String name);
 
     Hourse searchHourseByHourseId(@Param("hourseId") String hourseId);
 
@@ -23,4 +24,6 @@ public interface HourseDao {
     Address searchAddressByHourseId(Integer hourseId);
 
     void createHourseeHourse(Hourse hourse);
+
+    List<Hourse> searchHourseListByName(HashMap<String,Object> nameMap);
 }

@@ -6,6 +6,8 @@ import cn.hytc.model.User;
 import cn.hytc.service.HourseRentContactService;
 import cn.hytc.service.HourseService;
 import cn.hytc.service.UserService;
+import cn.hytc.utils.Resume_Word;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("generateHourseRentContact")
@@ -26,6 +33,66 @@ public class HourseRentContactController {
     private UserService userService;
     @Autowired
     private HourseService hourseService;
+
+    @RequestMapping("downloadConteact")
+    private String downloadContract(@Param("contractId") String contractId, HttpServletResponse response){
+        List<HourseContract> hourseContractList=hourseRentContactService.searchHourseContractByContractId(contractId);
+        String rentUserId=hourseContractList.get(0).getRentUserId()+"";
+        String masterId=hourseContractList.get(0).getMasterId();
+        User user1=userService.searchUserByUserId(rentUserId);
+        User user2=userService.searchUserByUserId(masterId);
+        String rentMoney=hourseContractList.get(0).getSingleMoney()*hourseContractList.get(0).getRentDay()+"";
+        String rentDay=hourseContractList.get(0).getRentDay()+"";
+        String contractContent=hourseContractList.get(0).getContractContent();
+        String createTime=hourseContractList.get(0).getCreateTime();
+        Map<String,Object> myMap=new HashMap<String, Object>();
+        myMap.put("userName",user1.getUserName());
+        myMap.put("masterName",user2.getUserName());
+        myMap.put("rentMoney",rentMoney);
+        myMap.put("rentDay",rentDay);
+        myMap.put("contract",contractContent);
+        myMap.put("createUser",createTime);
+        File file=null;
+        InputStream fin=null;
+        ServletOutputStream out=null;
+        file=Resume_Word.createDoc(myMap,"resume");
+        try {
+            fin=new FileInputStream(file);
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/msword");
+            response.addHeader("Content-Disposition","attachment;filename=resume.doc");
+            out=response.getOutputStream();
+            byte[] buffer=new byte[1024];
+            int bytesToRead=-1;
+            while ((bytesToRead=fin.read(buffer))!=-1){
+                out.write(buffer,0,bytesToRead);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (fin!=null){
+                try {
+                    fin.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (out!=null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (file !=null){
+                file.delete();
+            }
+        }
+        return null;
+    }
+
 
     @RequestMapping("searchAllHourseContract")
     private ModelAndView searchAllHourseContract(Integer page,Integer offSet){

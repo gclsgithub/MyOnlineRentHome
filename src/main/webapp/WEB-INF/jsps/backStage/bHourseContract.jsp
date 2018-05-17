@@ -27,7 +27,7 @@
 <body>
     <div class="clearfix">
         <form method="get" action="common/searchHourseByHourseContract.do">
-            <input type="text" placeholder="请输入关键词" class="input-text ac_input" name="search_text" value="" id="search_text" autocomplete="off" style="width:300px"><button type="submit" class="btn btn-default" id="search_button">搜索</button>
+            <input type="text" placeholder="请输入合同编号" class="input-text ac_input" name="search_text" value="" id="search_text" autocomplete="off" style="width:300px"><button type="submit" class="btn btn-default" id="search_button">搜索</button>
         </form>
     </div>
 
@@ -47,7 +47,7 @@
                 <td>${contract.contractId}</td>
                 <td>${contract.masterName}</td>
                 <td><a href="${pageContext.request.contextPath}/generateHourseRentContact/modifyContract.do?contract.ContractId=${contract.contractId}">修改</a></td>
-                <td><a href="${pageContext.request.contextPath}/generateHourseRentContact/deletContract.do?userId=${contract.userId}">删除</a></td>
+                <td><a href="${pageContext.request.contextPath}/generateHourseRentContact/downloadConteact.do?contractId=${contract.contractId}">保存文档</a></td>
             </tr>
         </c:forEach>
     </tbody>

@@ -83,4 +83,8 @@ public class HourseRentContactServiceImpl implements HourseRentContactService{
         List<HourseContract> hourseContract=hourseRentContactDao.searchHourseContractByHourseId(hourseId);
         return hourseContract;
     }
+
+    public List<HourseContract> searchHourseContractByContractId(String contractId) {
+        return hourseRentContactDao.searchHourseContractByHourseId(contractId);
+    }
 }

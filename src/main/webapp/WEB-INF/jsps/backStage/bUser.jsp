@@ -23,8 +23,8 @@
 <body>
 <div class="codeView docs-example">
     <div class="clearfix">
-        <form method="get" action="${pageContext.request.contextPath}/common/searchAllUserByUserName.do">
-            <input type="text" placeholder="请输入关键词" class="input-text ac_input" name="search_text" value="" id="search_text" autocomplete="off" style="width:300px"><button type="submit" class="btn btn-default" id="search_button">搜索</button>
+        <form method="get" action="${pageContext.request.contextPath}/user/searchAllUserByUserName.do">
+            <input type="text" placeholder="搜索查询用户名" class="input-text ac_input" name="userName" value="" id="search_text" autocomplete="off" style="width:300px"><button type="submit" class="btn btn-default" id="search_button">搜索</button>
         </form>
     </div>
 </div>
@@ -42,7 +42,7 @@
                 <tr>
                     <td>${start.index+1}</td>
                     <td>${user.userName}</td>
-                    <td>*************</td>
+                    <td>*********</td>
                     <td><a href="${pageContext.request.contextPath}/jump/JumpToModifyUser.do?userId=${user.userId}">修改</a></td>
                     <td><a href="${pageContext.request.contextPath}/user/deletUser.do?userId=${user.userId}">删除</a></td>
                 </tr>

@@ -28,10 +28,10 @@ public class HourseServiceImpl implements HourseService {
     @Autowired
     private AreaDao areaDao;
 
-    public List<Hourse> searchHourseByName(String name) {
+    public List<Hourse> searchHourseByKeyWord(String name) {
         //当没有keyword的时候搜索全部
         name="'%"+name+"%'";
-        List<Hourse> hourseList= hourseDao.searchHourseListByName(name);
+        List<Hourse> hourseList= hourseDao.searchHourseByKeyWord(name);
         return hourseList;
     }
 
@@ -72,5 +72,13 @@ public class HourseServiceImpl implements HourseService {
         hourse.setHourseAreaId(city);
         hourse.setLeaveRoom(hourse.getRoom());
         hourseDao.createHourseeHourse(hourse);
+    }
+
+    public List<Hourse> searchHourseByName(String hourseName,int start,int offSet) {
+        HashMap<String,Object> nameMap=new HashMap<String, Object>();
+        nameMap.put("hourseName",hourseName);
+        nameMap.put("start",0);
+        nameMap.put("offSet",0);
+        return hourseDao.searchHourseListByName(nameMap);
     }
 }

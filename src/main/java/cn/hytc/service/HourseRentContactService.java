@@ -12,4 +12,6 @@ public interface HourseRentContactService {
     Integer searchAllHourseContract();
 
     List<HourseContract> searchHourseContractByHourseId(String hourseId);
+
+    List<HourseContract> searchHourseContractByContractId(String contractId);
 }

@@ -67,6 +67,15 @@ public class HourseController {
         return mv;
     }
 
+    @RequestMapping("bsearchHourseByHourseName")
+    private ModelAndView SearchHourseByHourseName(String hourseName){
+        ModelAndView mv=new ModelAndView();
+        List<Hourse> hourseList=hourseService.searchHourseByName(hourseName,3,0);
+        mv.addObject(hourseList);
+        mv.setViewName("jsps/backStage/bHourse");
+        return mv;
+    }
+
     @RequestMapping("seachHourseByName")
     private ModelAndView SearchHourseListByName(@RequestParam("searchName") String name, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
@@ -76,7 +85,7 @@ public class HourseController {
             return  mv;
         }
         mv.setViewName("jsps/HourseList");
-        List<Hourse> hourseList = hourseService.searchHourseByName(name);
+        List<Hourse> hourseList = hourseService.searchHourseByKeyWord(name);
         mv.addObject(hourseList);
         return mv;
     }
