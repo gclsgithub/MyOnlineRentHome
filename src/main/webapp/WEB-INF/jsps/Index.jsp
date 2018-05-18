@@ -80,12 +80,12 @@
         <div class="wp">
             <div class="tuwen">
                 <div class="tuwennr">
-                    <h2 class="title">去旅途中发现灵感</h2>
-                    <p class="info">地点：旅途　/　获取灵感：224克<br>
+                    <h2 class="title">朝阳花园</h2>
+                    <p class="info">地点：北京　/　获取灵感：220克<br>
                         <br>
-                        又要出发了！背上行囊，乘坐旅行的大巴，去遇见更多有趣的人，发现更多新鲜的创意，找到不可思议的灵感。<br>
+                        阳光小区，学区房不用摇号，可公积金支付<br>
                         <br>
-                        这，就是我们旅行的意义,获取租房设置意义</p>
+                        租房天下，易租生活</p>
                     <p class="btnbar"><a class="btn-buy" href="http://localhost:8091/hourse/housrsedetail.do?hourseId=1" target="_blank"><span class="paddingW"></span>马上订购&gt;&gt;</a></p>
                 </div>
             </div>
@@ -95,10 +95,10 @@
         <div class="wp">
             <div class="tuwen">
                 <div class="tuwennr r">
-                    <h2 class="title">在艺术的汪洋里汲取灵感</h2>
+                    <h2 class="title">北京新村</h2>
                     <p class="info">地点：画廊　/　获取灵感：798克<br>
                         <br>
-                        当我们在看画展的时候，我们在看些什么？无论印象派还是立体派，卡拉瓦乔还是莫奈，传世珍宝还是街头涂鸦……照单全收。<br>
+                        独栋别墅，超大空间，交通便利，地铁口<br>
                         <br>
                         在他们创作的激情里，找到我们久违的触动。</p>
                     <p class="btnbar"><a class="btn-buy" href="http://localhost:8091/hourse/housrsedetail.do?hourseId=2" target="_blank"><span class="paddingW"></span>马上订购&gt;&gt;</a></p>
